@@ -18,9 +18,9 @@ Websites will be available at `localhost/yourwebsite`.
 
 ### Composer commands
 
-The `./composer` command can be used to run composer commands within the container root.
+The `composer` script can be used to run composer commands within the container root.
 
-e.g. `./composer install` will install dependencies.
+e.g. from within a site folder, run `../../composer install` will install dependencies.
 
 ### XDebug
 
