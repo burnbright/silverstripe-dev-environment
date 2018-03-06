@@ -1,0 +1,14 @@
+#!/bin/bash
+composer () {
+    tty=
+    tty -s && tty=--tty
+    docker run \
+        $tty \
+        --interactive \
+        --rm \
+        --volume $HOME/.ssh:/root/.ssh \
+        --volume $(pwd):/app \
+        composer --ignore-platform-reqs "$@" # ignores the fact composer uses latest php
+}
+
+composer "$@"
