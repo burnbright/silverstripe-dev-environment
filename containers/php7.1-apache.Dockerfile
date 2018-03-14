@@ -14,6 +14,7 @@ RUN apt-get update -y && apt-get install -y \
 		libxslt-dev \
 		zlib1g-dev \
 		libicu-dev \
+		libzip-dev \
 		g++ \
 		openssh-client \
 	--no-install-recommends && \
@@ -34,6 +35,7 @@ RUN docker-php-ext-configure intl && \
 		pdo_mysql \
 		soap \
         xsl \
+		zip \
 		mcrypt
 
 COPY ./php.ini /usr/local/etc/php/
@@ -51,8 +53,10 @@ RUN echo "ServerName localhost" > /etc/apache2/conf-available/fqdn.conf && \
 	usermod -G staff www-data
 
 # Install PECL Extensions
-RUN pecl install xdebug
+RUN pecl install zip
 
+# XDebug
+RUN pecl install xdebug
 RUN XDEBUG_INI=/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
 	docker-php-ext-enable xdebug && \
 	sed -i '1 a xdebug.remote_autostart=1' $XDEBUG_INI && \
