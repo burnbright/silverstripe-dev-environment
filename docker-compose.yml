@@ -2,8 +2,8 @@ version: '3'
 services:
   web:
     build:
-      context: .
-      dockerfile: containers/php7.1-apache.Dockerfile
+      context: containers
+      dockerfile: php7.1-apache.Dockerfile
     image: burnbright/php7.1-silverstripe
     ports:
       - "80:80"
