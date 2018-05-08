@@ -1,0 +1,15 @@
+#!/bin/bash
+
+dep () {
+    tty=
+    tty -s && tty=--tty
+    docker run -it --rm --name silverstripe-deploy \
+        -v "$PWD":/usr/src/myapp \
+        --volume $HOME/.ssh:/root/.ssh \
+        --volume composer_cache:/home/root/.composer \
+        -w /usr/src/myapp \
+        burnbright/php7.1-silverstripe php \
+        ./vendor/bin/dep -vvv "$@"
+}
+
+dep "$@"
