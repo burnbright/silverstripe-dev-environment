@@ -1,5 +1,8 @@
 basedir = ../..
 
+up:
+	docker-compose up
+
 build-container:
 	docker-compose build
 
