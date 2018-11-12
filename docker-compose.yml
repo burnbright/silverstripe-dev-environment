@@ -15,11 +15,14 @@ services:
       SS_DATABASE_USERNAME: 'root'
       SS_DATABASE_PASSWORD: 'password'
       SS_DATABASE_CHOOSE_NAME: 'true'
-      SS_DEFAULT_ADMIN_USERNAME: admin
-      SS_DEFAULT_ADMIN_PASSWORD: password
+      SS_DEFAULT_ADMIN_USERNAME: 'admin'
+      SS_DEFAULT_ADMIN_PASSWORD: 'password'
       XDEBUG_CONFIG: 'remote_host=docker.for.mac.host.internal remote_enable=0' # set this to 1 to enable debugging
+      SSMTP_HOST: 'mailhog'
+      SSMTP_PORT: '1025'
     depends_on:
       - database
+      - mailhog
   database:
     hostname: database # used by _ss_environment.php database host conf
     image: mysql:5.5
@@ -30,5 +33,11 @@ services:
       - "4306:3306"
     volumes:
        - db-data:/var/lib/mysql
+  mailhog:
+    hostname: mailhog
+    image: mailhog/mailhog:latest
+    ports:
+        - "1025:1025"
+        - "8025:8025"
 volumes:
   db-data:
