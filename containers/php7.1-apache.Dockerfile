@@ -55,10 +55,10 @@ COPY ./ssmtp.conf.tpl /ssmtp.conf.tpl
 RUN echo 'sendmail_path=/usr/sbin/ssmtp -oi -t' >> /usr/local/etc/php/conf.d/mail.ini
 
 # Install composer
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
-	php -r "if (hash_file('SHA384', 'composer-setup.php') === '93b54496392c062774670ac18b134c3b3a95e5a5e5c8f1a9f115f203b75bf9a129d5daa8ba6a13e2cc8a1da0806388a8') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
-	php composer-setup.php --install-dir=/usr/bin --filename=composer && \
-	php -r "unlink('composer-setup.php');"
+COPY ./install-composer.sh /tmp/install-composer.sh
+RUN apt-get update -yq && apt-get install -yqq \
+		git zip ssh
+RUN chmod +x /tmp/install-composer.sh && /tmp/install-composer.sh
 
 RUN echo "ServerName localhost" > /etc/apache2/conf-available/fqdn.conf && \
 	echo "date.timezone = Pacific/Auckland" > /usr/local/etc/php/conf.d/timezone.ini && \

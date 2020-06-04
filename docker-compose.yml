@@ -25,7 +25,7 @@ services:
       - mailhog
   database:
     hostname: database # used by _ss_environment.php database host conf
-    image: mysql:5.5
+    image: mysql:5.7
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 'password'

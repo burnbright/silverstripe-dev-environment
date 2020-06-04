@@ -31,6 +31,6 @@ You need to change the `remote_enable=0` config to `remote_enable=1` before star
 ### Database
 
 Database names will automatically be chosen, based on the website folder name in the sites directory.
-e.g. `SS_yourwebsite` , if your website foler is `sites/yourwebsite`.
+e.g. `SS_yourwebsite` , if your website folder is `sites/yourwebsite`.
 
 Once the mysql container is running, you can connect to it with your tool of choice at `localhost:4306`
